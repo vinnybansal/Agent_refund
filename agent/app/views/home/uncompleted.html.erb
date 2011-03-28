@@ -1,0 +1,28 @@
+<h1>Complete Your Profile</h1>
+<%= form_for @person do |form|%>
+<%= form.error_messages %>
+<table><tr><td>
+    <%= form.label :field1, "Dummy field" %>
+    </td><td>
+    <%= form.text_field :field1 %>
+    </td></tr>
+    <tr><td>
+    <%= form.label :field2, "Dummy field" %>
+    </td><td>
+    <%= form.text_field :field2 %>
+    </td></tr>
+    <tr><td>
+    <%= form.label :field3, "Dummy field" %>
+    </td><td>
+    <%= form.text_field :field3 %>
+    </td></tr>
+    <tr><td>
+    <%= form.label :field4, "Dummy field" %>
+    </td><td>
+    <%= form.text_field :field4 %>
+    </td></tr>
+    <tr><td>
+    <%= form.submit %>
+    </td></tr>
+</table>
+<% end %>

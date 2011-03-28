@@ -1,0 +1,4 @@
+<h1>This is your home page</h1>
+<% if @user.user_type == "agent" %>
+<%= link_to "Your agreement", :controller => "home",:action => "download" %>
+<% end %>
