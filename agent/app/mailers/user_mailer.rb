@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     setup_email(user)
     @subject    += 'Please activate your new account'
-    @body[:url]  = "http://agent.com:3000/activate/#{user.perishable_token}"
+    @body[:url]  = "http://localhost:3001/activate/#{user.perishable_token}"
   end
 
   def welcome(user)

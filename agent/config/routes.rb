@@ -11,6 +11,7 @@ Agent::Application.routes.draw do
   match '/login' => "user_sessions#new", :as => :login
   match '/logout' => "user_sessions#destroy", :as => :logout
   match '/new_buyer' => "users#new_buyer", :as => "new_buyer"
+  match '/new_seller' => "users#new_seller", :as => "new_seller"
   match 'activate/:activation_code' => "users#activate", :as => :activate
   root :to => 'home#index'
   match '/uncompleted' => "home#uncompleted", :as => :uncompleted
