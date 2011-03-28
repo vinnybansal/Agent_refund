@@ -6,6 +6,11 @@ class UsersController < ApplicationController
   def new_buyer
     @user = User.new
   end
+
+  def new_seller
+   @user = User.new
+  end
+
   def show
     @user = @current_user
   end
@@ -28,8 +33,16 @@ class UsersController < ApplicationController
     else
       render :action => :new
     end
-
+   elsif params[:user][:user_type] == "seller"
+      #do integration part
+    if @user.save_without_session_maintenance
+       @user.activation_instructions
+      flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+      redirect_to root_url
+    else
+      render :action => :new
     end
+   end
  end
  def account
    @user = current_user
