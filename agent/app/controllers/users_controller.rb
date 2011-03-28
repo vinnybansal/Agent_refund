@@ -17,9 +17,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if params[:user][:user_type] == "agent"
+    @user.update_attribute(:active, true)
     if @user.save
-      flash[:notice] = "Registration successful."
-        pdf = make_pdf @user
+         pdf = make_pdf @user
+         @user.activation_instructions
+         flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
         redirect_to root_url
      else
         redirect_to new_user_url and return
@@ -65,9 +67,10 @@ class UsersController < ApplicationController
  def update
     @user = current_user
     if @user.update_attributes(params[:user]) 
-     @user.update_attribute(:p_completed, true)
-     flash[:notice] = "Successfully updated post."
-     redirect_to root_url
+     #@user.update_attribute(:p_completed, true)
+
+     flash[:notice] = "Successfully uploaded the agreement."  if  params[:user][:hifield]
+     redirect_to welcome_url
     end
   end
   private

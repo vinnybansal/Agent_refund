@@ -1,31 +1,35 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
-    <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag :defaults %>
-    <%= csrf_meta_tag %>
-    <%= yield(:head) %>
-  </head>
-  <body>
-  
-    <div id="container">
-      <div id="user_nav">
-    <% if current_user %>
-      <%= current_user.login %>
-      <%= link_to "Logout", logout_path %>
-    <% else %>
-      <%= link_to "Buyer Signup", new_buyer_path %>
-      <%= link_to "Seller Signup", new_seller_path %>
-      <%= link_to "Agent Signup", new_user_path %> |
-      <%= link_to "Login", login_path %>
-    <% end %>
-      </div>
-      <% flash.each do |name, msg| %>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      <% end %>
-      <%= content_tag :h1, yield(:title) if show_title? %>
-      <%= yield %>
-    </div>
-  </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Agent Refund</title>
+<%= stylesheet_link_tag "application" %>
+<%= stylesheet_link_tag "template" %>
+<%= javascript_include_tag :defaults %>
+<%= csrf_meta_tag %>
+<%= yield(:head) %>
+</head>
+
+<body>
+<!-- main wrap start here -->
+     <div class="main_wrap">
+	      <div class="main_container">
+		 <%=  render :partial => "shared/header" %>
+			   <!-- content wrap start here -->
+			   <div class="content_wrap">
+                             <% flash.each do |name, msg| %>
+                             <%= content_tag :div, msg, :id => "flash_#{name}" %>
+                             <% end %>
+                             <%= content_tag :h1, yield(:title) if show_title? %>
+                             <%= yield %>
+
+			   </div>
+			   <!-- content wrap end here -->
+		  </div>
+	 </div>
+<!-- main wrap end here -->
+<div class="clear"></div>
+ <%=  render :partial => "shared/footer" %>
+
+</body>
 </html>

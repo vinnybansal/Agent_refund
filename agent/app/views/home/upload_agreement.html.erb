@@ -1,0 +1,13 @@
+<%= form_for @person, :html => { :multipart => true } do |form|%>
+<%= form.error_messages %>
+<table><tr><td>
+    <%= form.label :agreement, "Upload Agreement" %>
+    </td><td>
+    <%= form.file_field :agreement %>
+    <%= hidden_field_tag :hifield, :value => "something" %>
+    </td></tr>
+  <tr><td>
+    <%= form.submit %>
+    </td></tr>
+  </table>
+<% end %>

@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   before_filter :require_user
-  before_filter :require_profile_completeness, :except => [:uncompleted]
+  #before_filter :require_profile_completeness, :except => [:uncompleted]
   def index
     @user = current_user
   end
@@ -11,6 +11,12 @@ class HomeController < ApplicationController
     @user = current_user
     send_file "#{Rails.root}/public/upload/agreement/#{@user.id}/agreement.pdf", :type=>"application/pdf"
     #redirect_to root_path
+  end
+  def upload_agreement
+    @person = current_user
+  end
+  def welcome
+    
   end
   
 

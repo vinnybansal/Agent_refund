@@ -8,9 +8,9 @@ attr_accessor :license_file_name,:policy_file_name,:agreement_file_name
   has_attached_file :policy,
    :url  => "/policy/:id",
    :path => "#{Rails.root}/public/upload/policy/:id/:basename.:extension"
-  #  has_attached_file :agreement,
-  #   :url  => "/agreement/:id",
-  #   :path => "#{Rails.root}/public/upload/agreement/:id/:basename.:extension"
+  has_attached_file :agreement,
+   :url  => "/agreement/:id",
+   :path => "#{Rails.root}/public/upload/new_agreements/:id/:basename.:extension"
  def activate!
     self.active = true
     save

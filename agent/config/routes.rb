@@ -13,8 +13,10 @@ Agent::Application.routes.draw do
   match '/new_buyer' => "users#new_buyer", :as => "new_buyer"
   match '/new_seller' => "users#new_seller", :as => "new_seller"
   match 'activate/:activation_code' => "users#activate", :as => :activate
-  root :to => 'home#index'
+  match '/upload_agreement' => "home#upload_agreement", :as => :upload_agreement
   match '/uncompleted' => "home#uncompleted", :as => :uncompleted
+  match '/welcome' => "home#welcome", :as => :welcome
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -65,7 +67,7 @@ Agent::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => "welcome#index"
-
+root :to => 'home#index'
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

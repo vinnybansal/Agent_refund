@@ -1,0 +1,13 @@
+<!-- header wrap start here -->
+<div class="header_wrap">
+        <div class="logo"><a href="#"><%= image_tag "logo.jpg" %></a></div>
+        <div class="login_btn"><% if current_user %>
+      <%= current_user.login %>&nbsp;|&nbsp;<%= link_to "Logout", logout_path %>
+    <% else %>
+      <%= link_to "Buyer Signup", new_buyer_path %> |
+      <%= link_to "Seller Signup", new_seller_path %> |
+      <%= link_to "Agent Signup", new_user_path %> |
+      <%= link_to "Login", login_path %>
+    <% end %></div>
+   </div>
+   <!-- header wrap end here -->

@@ -1,0 +1,145 @@
+body {
+margin:0px;
+padding:0px;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+color:#000000;
+background:url(../images/body_bg.jpg) repeat-x top left #ffffff;
+}
+h1,h2,h3,h4,h5,ul,li,p {
+margin:0px;
+padding:0px;
+}
+a {
+text-decoration:none;
+color:#000000;
+}
+a:hover {
+color:#ff0000;
+text-decoration:none;
+}
+a,img {
+outline:none;
+border:0px;
+}
+p {
+line-height:22px;
+padding:0 0 15px 0px;
+}
+h2 {
+padding:25px 0px 35px 0; 
+font-size:18px;
+color:#ff9000;
+text-align:center;
+font-weight:normal;
+}
+h3 {
+font-size:30px;
+color:#ffffff;
+text-align:center;
+padding:5px 0 10px 0px;
+}
+h4 {
+font-size:30px;
+color:#ffffff;
+text-align:center;
+padding:50px 0 10px 0px; 
+}
+.clear {
+clear:both;
+height:0px;
+line-height:0px;
+font-size:0px;
+}
+.main_wrap {
+width:900px;
+margin:0 auto;
+}
+.main_container {
+width:900px;
+float:left;
+}
+.header_wrap {
+float:left;
+width:900px;
+}
+.logo {
+float:left;
+width:328px;
+padding:40px 0 25px 0px;
+}
+.login_btn {
+float:right;
+padding:12px 0 0 0px;
+}
+.login_btn input {
+border:0;
+background:url(../images/login_bg.jpg) no-repeat;
+width:76px;
+height:31px;
+text-align:center;
+border:none medium;
+font-size:14px;
+color:#e2ebf2;
+padding:0 0 0 0px;
+font-weight:bold;
+cursor:pointer;
+}
+.content_wrap {
+float:left;
+width:900px;
+padding:0 0 25px 0px;
+}
+.left_box {
+float:left;
+width:234px;
+height:190px;
+background:url(../images/left_box_bg.jpg) no-repeat;
+margin-top:50px;
+}
+.center_box_main {
+float:left;
+width:394px;
+height:294px;
+margin-left:18px; 
+}
+.right_box {
+float:right; 
+width:234px;
+height:190px;
+background:url(../images/left_box_bg.jpg) no-repeat;
+margin-top:50px;
+}
+.footer_bg {
+width:100%;
+background:url(../images/footer_bg.jpg) repeat-x;
+height:50px;
+}
+.footer_main {
+width:900px;
+margin:0px auto;
+}
+.footer_left {
+float:left;
+width:669px;
+padding:18px 0 0 0px;
+}
+ul.social {
+float:right;
+margin:0px;
+padding:0px;
+}
+.agent_text {
+float:left;
+width:115px;
+padding:20px 0 0 0px; 
+}
+.social li {
+list-style:none;
+float:left;
+padding:0 0 0 5px;
+}
+.footer_right {
+float:right;
+padding:15px 0 0 0px;
+}
