@@ -1,5 +1,10 @@
 class User < ActiveRecord::Base
 acts_as_authentic
+#validates :login, :email, :first_name, :last_name, :password, :password_confirmation , :presence => true
+#validates_uniqueness_of :login, :email
+#validates_attachment_presence :license, :policy
+validates_attachment_content_type :license, :content_type => 'application/pdf'
+validates_attachment_content_type :policy, :content_type => 'application/pdf'
 attr_accessor :license_file_name,:policy_file_name,:agreement_file_name
 
   has_attached_file :license,
