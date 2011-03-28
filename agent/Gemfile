@@ -11,6 +11,7 @@ gem 'paperclip', "~> 2.3"
 gem 'mysql'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf'
 # Use unicorn as the web server
 # gem 'unicorn'
 
