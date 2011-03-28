@@ -17,11 +17,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if params[:user][:user_type] == "agent"
-    @user.update_attribute(:active, true)
-    if @user.save
+    if @user.save_without_session_maintenance
          pdf = make_pdf @user
-         @user.activation_instructions
-         flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+         @user.update_attribute(:active, true)
+         flash[:notice] = "Your account has been successfully created."
         redirect_to root_url
      else
         redirect_to new_user_url and return
