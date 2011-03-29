@@ -28,8 +28,9 @@ class UsersController < ApplicationController
     elsif params[:user][:user_type] == "buyer"
       #do integration part
     if @user.save_without_session_maintenance
-       @user.activation_instructions
-      flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+       #@user.activation_instructions
+       @user.update_attribute(:active, true)
+      flash[:notice] = "Your account has been successfully created."
       redirect_to root_url
     else
       render :action => :new
@@ -37,9 +38,10 @@ class UsersController < ApplicationController
    elsif params[:user][:user_type] == "seller"
       #do integration part
     if @user.save_without_session_maintenance
-       @user.activation_instructions
-      flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
-      redirect_to root_url
+       #@user.activation_instructions
+       @user.update_attribute(:active, true)
+      flash[:notice] = "Your account has been successfully created."
+      redirect_to  user_seller_properties_path(@user)
     else
       render :action => :new
     end
@@ -62,6 +64,8 @@ class UsersController < ApplicationController
      end
  end
  #update confliction
+  
+  
 
  def update
     @user = current_user

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type of property:</b>
+  <%= @seller_property.type_of_property %>
+</p>
+
+<p>
+  <b>Estimated price:</b>
+  <%= @seller_property.estimated_price %>
+</p>
+
+<p>
+  <b>Property zip code:</b>
+  <%= @seller_property.property_zip_code %>
+</p>
+
+<p>
+  <b>Property use:</b>
+  <%= @seller_property.property_use %>
+</p>
+
+<p>
+  <b>Street adress:</b>
+  <%= @seller_property.street_adress %>
+</p>
+
+<p>
+  <b>Property city:</b>
+  <%= @seller_property.property_city %>
+</p>
+
+<p>
+  <b>Property state:</b>
+  <%= @seller_property.property_state %>
+</p>
+
+<p>
+  <b>Phonenumber:</b>
+  <%= @seller_property.phonenumber %>
+</p>
+ <p><%= image_tag @seller_property.photo.url(:small) %></p>
+
+<%= link_to 'Edit', edit_seller_property_path(@seller_property) %> |
+<%= link_to 'Back', seller_properties_path %>

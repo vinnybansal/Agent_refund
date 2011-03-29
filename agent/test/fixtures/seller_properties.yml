@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type_of_property: MyString
+  estimated_price: MyString
+  property_zip_code: MyString
+  property_use: MyString
+  street_adress: MyString
+  property_city: MyString
+  property_state: MyString
+  phonenumber: MyString
+
+two:
+  type_of_property: MyString
+  estimated_price: MyString
+  property_zip_code: MyString
+  property_use: MyString
+  street_adress: MyString
+  property_city: MyString
+  property_state: MyString
+  phonenumber: MyString

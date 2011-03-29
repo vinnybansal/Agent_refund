@@ -1,11 +1,16 @@
 Agent::Application.routes.draw do
+  resources :seller_properties
   get "users/new"
 
   get "users/edit"
 
   get "user_sessions/new"
   resources :user_sessions
-  resources :users
+  
+  resources :users do
+    resources :seller_properties
+  end
+   
   resources :home
   match '/download' => "home#download"
   match '/login' => "user_sessions#new", :as => :login

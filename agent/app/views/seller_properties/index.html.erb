@@ -1,0 +1,39 @@
+<h1>Properties</h1>
+
+<table>
+  <tr>
+    <th>TypeofProperty</th>
+    <th>EstimatedPrice</th>
+    <th>zipcode</th>
+    <th>PropertyUse</th>
+    <th>StreetAddress</th>
+    <th>PropertyCity</th>
+    <th>PropertyState</th>
+    <th>PhoneNumber</th>
+    <th>Photo</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @seller_properties.each do |seller_property| %>
+  <tr>
+    <td><%= seller_property.type_of_property %></td>
+    <td><%= seller_property.estimated_price %></td>
+    <td><%= seller_property.property_zip_code %></td>
+    <td><%= seller_property.property_use %></td>
+    <td><%= seller_property.street_adress %></td>
+    <td><%= seller_property.property_city %></td>
+    <td><%= seller_property.property_state %></td>
+    <td><%= seller_property.phonenumber %></td>
+
+
+    <td><%= link_to 'Show', seller_property %></td>
+    <td><%= link_to 'Edit', edit_seller_property_path(seller_property) %></td>
+    <td><%= link_to 'Destroy', seller_property, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Create Property', new_seller_property_path %>

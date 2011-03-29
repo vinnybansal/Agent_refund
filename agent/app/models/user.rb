@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-acts_as_authentic
+ 
+ has_many :seller_properties,:include=>:user, :conditions=>["users.user_type=?","seller"]
+ acts_as_authentic
 #validates :login, :email, :first_name, :last_name, :password, :password_confirmation , :presence => true
 #validates_uniqueness_of :login, :email
 #validates_attachment_presence :license, :policy

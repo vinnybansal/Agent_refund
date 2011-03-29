@@ -1,0 +1,54 @@
+
+<%= form_for @seller_property, :html => { :multipart => true } do |f| %>
+  <% if @seller_property.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@seller_property.errors.count, "error") %> prohibited this seller_property from being saved:</h2>
+
+      <ul>
+      <% @seller_property.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type_of_property %><br />
+    <%= f.text_field :type_of_property %>
+  </div>
+  <div class="field">
+    <%= f.label :estimated_price %><br />
+    <%= f.text_field :estimated_price %>
+  </div>
+  <div class="field">
+    <%= f.label :property_zip_code %><br />
+    <%= f.text_field :property_zip_code %>
+  </div>
+  <div class="field">
+    <%= f.label :property_use %><br />
+    <%= f.text_field :property_use %>
+  </div>
+  <div class="field">
+    <%= f.label :street_adress %><br />
+    <%= f.text_field :street_adress %>
+  </div>
+  <div class="field">
+    <%= f.label :property_city %><br />
+    <%= f.text_field :property_city %>
+  </div>
+  <div class="field">
+    <%= f.label :property_state %><br />
+    <%= f.text_field :property_state %>
+  </div>
+  <div class="field">
+    <%= f.label :phonenumber %><br />
+    <%= f.text_field :phonenumber %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %><br />
+    <%= f.file_field :photo %>
+   </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
