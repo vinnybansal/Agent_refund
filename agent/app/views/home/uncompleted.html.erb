@@ -20,9 +20,12 @@
     <%= form.label :field4, "Dummy field" %>
     </td><td>
     <%= form.text_field :field4 %>
+    <%#= form.hidden_field :id, :value => @person.id %>
+    <%= hidden_field_tag :complete_profile,:value => "complete variable" %>
     </td></tr>
     <tr><td>
     <%= form.submit %>
     </td></tr>
 </table>
 <% end %>
+ 

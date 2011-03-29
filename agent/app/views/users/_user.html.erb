@@ -1,31 +1,31 @@
-<%= form_for @user , :html => { :multipart => true } do |form| %>  
+<%= form_for :user, @user , :url => new_agent_path, :html => { :multipart => true } do |form| %>  
     <%= form.error_messages %>
     <div class="formList">
     <table>
     <tr><td>
     <%= form.label :login, "Login" %>
     </td><td>
-    <%= form.text_field :login %>
+    <%= form.text_field :login, :class => 'required_field' %>
     </td></tr>
     <tr><td>
     <%= form.label :email, "Email" %>
     </td><td>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, :class => 'required_field' %>
     </td></tr>
     <tr><td>
     <%= form.label :password, "Password" %>
     </td><td>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, :class => 'required_field' %>
     </td></tr>
     <tr><td>
     <%= form.label :password_confirmation, "Password confirmation" %>
     </td><td>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :first_name, "First Name" %>
     </td><td>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :middle_initial, "Middle Initial" %>
@@ -35,7 +35,7 @@
     <tr><td>
     <%= form.label :last_name, "Last Name" %>
     </td><td>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :company_name, "Company Name" %>
@@ -70,20 +70,20 @@
     <tr><td>
     <%= form.label :license %>
     </td><td>
-    <%= form.file_field :license %>
+    <%= form.file_field :license, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :policy %>
     </td><td>
-    <%= form.file_field :policy %>
+    <%= form.file_field :policy, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
-    <%= check_box_tag :terms_service %>
+    <%= form.check_box :terms_service %>
     </td><td>
     <%= form.label :terms_service, "I have read and agree to Terms of Service " %>
     </td></tr>
     <tr><td>
-    <%= check_box_tag :privacy_policy  %>
+    <%= form.check_box :privacy_policy  %>
     </td><td>
     <%= form.label "I have read and agree to Privacy Policy " %>
     <%= form.hidden_field :user_type, :value => "agent" %>

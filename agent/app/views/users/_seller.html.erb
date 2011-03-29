@@ -1,12 +1,12 @@
 
-   <% form_for @user do |form| %>  
+   <% form_for @user do |form| %>
     <%= form.error_messages %>
     <div class="formList">
     <table>
     <tr><td>
     <%= form.label :login, "Login" %>
     </td><td>
-    <%= form.text_field :login %>
+    <%= form.text_field :login, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :email, "Email" %>
@@ -16,23 +16,23 @@
     <tr><td>
     <%= form.label :password, "Password" %>
     </td><td>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :password_confirmation, "Password confirmation" %>
     </td><td>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :first_name, "First Name" %>
     </td><td>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, :class => 'required_field'  %>
     </td></tr>
     
     <tr><td>
     <%= form.label :last_name, "Last Name" %>
     </td><td>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, :class => 'required_field'  %>
     </td></tr>
     
     <tr><td>
@@ -50,7 +50,7 @@
     <tr><td>
     <%= form.label :property_price, "PropertyPrice" %>
     </td><td>
-    <%= form.text_field :property_price %>
+    <%= form.text_field :property_price, :class => 'required_field'  %>
     </td></tr>
    <tr><td>
     <%= form.label :property_address, "PropertyAdress" %>
@@ -66,5 +66,5 @@
 
     <tr><td>
     <%= form.submit "Submit" %>
-    </td></tr></table>
+    </td></tr></table></div>
 <% end %> 

@@ -12,6 +12,8 @@ Agent::Application.routes.draw do
   end
    
   resources :home
+  match '/user_profile' => "home#user_profile", :as => :user_profile
+  match '/new_agent' => "users#create", :as => :new_agent
   match '/download' => "home#download"
   match '/login' => "user_sessions#new", :as => :login
   match '/logout' => "user_sessions#destroy", :as => :logout

@@ -18,6 +18,8 @@ class HomeController < ApplicationController
   def welcome
     
   end
-  
+  def user_profile
+    @user = current_user
+  end
 
 end
