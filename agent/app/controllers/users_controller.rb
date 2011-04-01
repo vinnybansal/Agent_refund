@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   require 'pdfkit'
   def new
     @user = User.new
+    @user.user_agent = UserAgent.new
+    @country = Country.where("name = 'United States'")
+    @states = State.where("country_id = #{@country.first.id}")
   end
+
   def new_buyer
     @user = User.new
   end
@@ -16,8 +20,12 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(params[:user])
+    @country = Country.where("name = 'United States'")
+    @states = State.where("country_id = #{@country.first.id}")
+    @user.build_user_agent(params[:user_agent])
     if params[:user][:user_type] == "agent"
-    if @user.save_without_session_maintenance
+    if @user.save
+         #@user.build_user_agent.save
          pdf = make_pdf @user
          @user.update_attribute(:active, true)
          flash[:notice] = "Your account has been successfully created."
@@ -27,7 +35,7 @@ class UsersController < ApplicationController
     end
     elsif params[:user][:user_type] == "buyer"
       #do integration part
-    if @user.save_without_session_maintenance
+    if @user.save
        #@user.activation_instructions
        @user.update_attribute(:active, true)
        flash[:notice] = "Your account has been successfully created."
@@ -37,7 +45,7 @@ class UsersController < ApplicationController
     end
    elsif params[:user][:user_type] == "seller"
       #do integration part
-    if @user.save_without_session_maintenance
+    if @user.save
        #@user.activation_instructions
        @user.update_attribute(:active, true)
       flash[:notice] = "Your account has been successfully created."
@@ -70,8 +78,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes!(params[:user])
-     @user.update_attribute(:p_completed, true) if params[:complete_profile]
-     @user.update_attribute(:ag_uploaded, true) if params[:hifield]
+     @user.user_agent.update_attribute(:p_completed, true) if params[:complete_profile]
+     @user.user_agent.update_attribute(:ag_uploaded, true) if params[:hifield]
      flash[:notice] = "Successfully uploaded the agreement."  if  params[:hifield]
      flash[:notice] = "Successfully completed the profile." if params[:complete_profile]
      redirect_to welcome_path
@@ -80,13 +88,29 @@ class UsersController < ApplicationController
      redirect_to :controller => :home,:action => :uncompleted
     end
   end
+  def reset_password
+   @user = User.find_using_perishable_token(params[:reset_password_code], 1.week) || (raise Exception)
+ end
+
+ def reset_password_submit
+   @user = User.find_using_perishable_token(params[:reset_password_code], 1.week) || (raise Exception)
+   @user.active = true
+   if @user.update_attributes(params[:user].merge({:active => true}))
+     flash[:notice] = "Successfully reset password."
+     redirect_to root_url
+   else
+     flash[:notice] = "There was a problem resetting your password."
+     render :action => :reset_password
+   end
+ end
+ 
   
   private
   
     def make_pdf user
     pdf = <<EOF
-    <p>I #{user.first_name} #{user.last_name} of #{user.company_name} real estate company,
-    with a license number of #{user.id} located at #{user.office_address}
+    <p>I #{user.first_name} #{user.last_name} of #{user.user_agent.company_name} real estate company,
+    with a license number of #{user.id} located at #{user.address1} #{user.address2}
     agrees to pay a referral fee to Agent Refund</p>
 EOF
    kit = PDFKit.new(pdf)

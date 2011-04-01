@@ -1,4 +1,4 @@
-<%= form_for :user, @user , :url => new_agent_path, :html => { :multipart => true } do |form| %>  
+<%= form_for @user , :html => { :multipart => true } do |form| %>  
     <%= form.error_messages %>
     <div class="formList">
     <table>
@@ -6,6 +6,7 @@
     <%= form.label :login, "Login" %>
     </td><td>
     <%= form.text_field :login, :class => 'required_field' %>
+    <%= hidden_field_tag :nested %>
     </td></tr>
     <tr><td>
     <%= form.label :email, "Email" %>
@@ -37,20 +38,33 @@
     </td><td>
     <%= form.text_field :last_name, :class => 'required_field'  %>
     </td></tr>
-    <tr><td>
-    <%= form.label :company_name, "Company Name" %>
+     <tr><td>
+    <%= form.label :address1, "Address 1" %>
     </td><td>
-    <%= form.text_field :company_name %>
+    <%= form.text_field  :address1 %>
     </td></tr>
     <tr><td>
-    <%= form.label :broker_name, "Broker Name" %>
+    <%= form.label :address2, "Address 2" %>
     </td><td>
-    <%= form.text_field :broker_name %>
+    <%= form.text_field  :address2 %>
+    </td></tr>
+    <%= fields_for @user.user_agent do |user_agents| %>
+    <tr><td>
+    <%= user_agents.label :broker_name, "Broker Name" %>
+    </td><td>
+    <%= user_agents.text_field :broker_name %>
     </td></tr>
     <tr><td>
-    <%= form.label :office_address, "Office Address" %>
+    <%= user_agents.label :company_name, "Company Name" %>
     </td><td>
-    <%= form.text_area  :office_address %>
+    <%= user_agents.text_field :company_name %>
+    </td></tr>
+
+    <% end %>
+    <tr><td>
+    <%= form.label :state, "State" %>
+    </td><td>
+    <%= collection_select(:user, :state, @states, :name, :name, {:prompt => true}, {"style" => "width:291px;"})  %>
     </td></tr>
     <tr><td>
     <%= form.label :city, "City" %>
@@ -58,25 +72,22 @@
     <%= form.text_field :city %>
     </td></tr>
     <tr><td>
-    <%= form.label :state, "State" %>
-    </td><td>
-    <%= form.text_field :state %>
-    </td></tr>
-    <tr><td>
     <%= form.label :zip, "zip" %>
     </td><td>
     <%= form.text_field :zip %>
     </td></tr>
+    <%= fields_for @user.user_agent do |user_agent| %>
     <tr><td>
     <%= form.label :license %>
     </td><td>
-    <%= form.file_field :license, :class => 'required_field'  %>
+    <%= user_agent.file_field :license, :class => 'required_field'  %>
     </td></tr>
     <tr><td>
     <%= form.label :policy %>
     </td><td>
-    <%= form.file_field :policy, :class => 'required_field'  %>
+    <%= user_agent.file_field :policy, :class => 'required_field'  %>
     </td></tr>
+    <% end %>
     <tr><td>
     <%= form.check_box :terms_service %>
     </td><td>

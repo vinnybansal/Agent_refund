@@ -3,23 +3,23 @@
 <%= form_for @user_session, :url => {:action => "create"} do |f| %>
 <%= f.error_messages %>
 <table>
-  <tr><td>
+ <tr><td>
 <%= f.label :login %>
-  </td><td>
+ </td><td>
 <%= f.text_field :login %>
-  </td></tr>
-  <tr><td>
+ </td></tr>
+ <tr><td>
 <%= f.label :password %>
-  </td><td>
+ </td><td>
 <%= f.password_field :password%>
-  </td></tr>
-  <tr><td>
+ </td></tr>
+ <tr><td>
 <%= f.check_box :remember_me %>
-  </td><td>
+ </td><td>
 <%= f.label :remember_me %>
-  </td></tr>
-  <tr><td>
-<%= f.submit "Login" %>
-  </td></tr>
+ </td></tr>
+ <tr><td>
+<%= f.submit "Login" %>   |&nbsp; <%= link_to "Forgot Password", forgot_password_url %>
+ </td></tr>
 </table>
-<% end %>
+<% end %> 

@@ -1,8 +1,8 @@
 class UserSessionsController < ApplicationController
  
  
-  before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
+  before_filter :require_no_user, :only => [:new, :create, :forgot_password, :forgot_password_lookup_email]
 
   def new
     @user_session = UserSession.new
@@ -23,4 +23,26 @@ class UserSessionsController < ApplicationController
     flash[:notice] = "Logout successful!"
     redirect_back_or_default new_user_session_url
   end
+  def forgot_password
+ if current_user
+   redirect_to edit_account_url
+ else
+   @user_session = UserSession.new()
+   end
+ end
+
+ def forgot_password_lookup_email
+   if current_user
+     redirect_to edit_account_url
+   else
+     user = User.find_by_email(params[:user_session][:login])
+     if user
+       user.send_forgot_password!
+       flash[:notice] = "A link to reset your password has been mailed to you."
+     else
+       flash[:notice] = "Email #{params[:user_session][:email]} wasn't found.  Perhaps you used a different one?  Or never registered or something?"
+       render :action => :forgot_password
+     end
+   end
+ end
 end

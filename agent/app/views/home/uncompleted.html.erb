@@ -1,31 +1,142 @@
 <h1>Complete Your Profile</h1>
-<%= form_for @person do |form|%>
-<%= form.error_messages %>
-<table><tr><td>
-    <%= form.label :field1, "Dummy field" %>
-    </td><td>
-    <%= form.text_field :field1 %>
-    </td></tr>
+<%= form_for @user_agent, :url => update_user_agent_path do |form|%>
+  <%= form.error_messages %>
+  <table>
+    <%= fields_for @user_agent.user do |user_fields| %>
+      <tr><td>
+          <%= user_fields.label :login, "Login" %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.text_field :login, :class => 'required_field' %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.label :email, "Email" %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.text_field :email, :class => 'required_field' %>
+        </td></tr>
+      <tr><td>
+
+          <%= user_fields.label :first_name, "First Name" %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.text_field :first_name, :class => 'required_field'  %>
+
+        </td></tr>
+      <tr><td>
+
+          <%= user_fields.label :middle_initial, "Middle Initial" %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.text_field :middle_initial %>
+        </td></tr>
+      <tr><td>
+
+          <%= user_fields.label :last_name, "Last Name" %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.text_field :last_name, :class => 'required_field'  %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.label :address1, "Adress.1" %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.text_field  :address1 %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.label :address2, "Address.2" %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.text_field  :address2 %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.label :state, "State" %>
+        </td></tr>
+      <tr><td>
+
+          <%= collection_select(:user, :state, @states, :name, :name, {:prompt => true}, {"style" => "width:291px;"})  %>
+        </td></tr>
+      <tr><td>
+          <%= user_fields.label :city, "City" %>
+        </td></tr>
+      <tr><td>
+
+          <%= user_fields.text_field :city %>
+        </td></tr>
+      <tr><td>
+
+
+          <%= user_fields.label :zip, "zip" %>
+        </td></tr>
+      <tr><td>
+
+          <%= user_fields.text_field :zip %>
+        </td></tr>
+    <% end %>
+    <% if  @user_agent.user.user_type == "agent"  %>
+      <tr><td>
+          <%= form.label :start_year, "What year did you start in the business?" %>
+        </td></tr>
+      <tr><td>
+          <%= form.date_select :start_year %>
+
+        </td></tr>
+      <tr><td>
+          <%= form.label :home_sold_last_year, "Homes sold last 12 months" %>
+        </td></tr><tr><td>
+          <%= form.text_field :home_sold_last_year %>
+        </td></tr>
+      <tr><td>
+          <%= form.label :top_cities, "Top 3 cities you’ve sold homes in over the last 3 years" %>
+        </td></tr><tr><td>
+          <%= form.text_field :top_cities %>
+        </td></tr>
+      <tr><td>
+          <%= form.label :home_sold_lifetime, "Homes sold in your career " %>
+        </td></tr><tr><td>
+          <%= form.text_field :home_sold_lifetime %>
+          <%= hidden_field_tag :complete_profile,:value => "complete variable" %>
+        </td></tr>
+      <tr><td>
+          <%= form.label :client_details, "Tell us and clients about yourself" %>
+        </td></tr><tr><td>
+          <%= form.text_field :client_details %>
+        </td></tr>
+      <tr><td>
+          <%= form.label :designation, "Designations" %>
+        </td></tr><tr><td><div style="width: 350px; height: 270px; float: right;">
+            <% @check_values.split(",").each do |feature| %>
+              <div style="width: 70px;float: left;margin-left: 10px;margin-left: 10px;margin-top: 10px;margin-right: 10px;"><%= check_box_tag "user_agent[designation][]", feature,
+                  (params[:designation] || {}).include?(feature) %>
+                <%= feature.humanize %></div>
+            <% end %></div>
+        </td></tr>
+      <tr><td>
+          <%= form.label :license_expiration_date, "License Expiration Date" %>
+        </td></tr><tr><td>
+          <%= form.date_select :license_expiration_date %>
+        </td></tr>
+      <tr><td>
+          <%= form.label :eo_policy_expiration_date, "E&O Policy Expiration Date" %>
+        </td></tr><tr><td>
+          <%= form.date_select :eo_policy_expiration_date %>
+        </td></tr>
+      <tr><td>
+          <%= form.label :violation, "Have you had a violation in the last 5 years?" %>
+        </td></tr><tr><td>
+          <%= form.text_field  :violation%>
+        </td></tr>
+      <tr><td>
+          <%= form.label :know_about_us, "How did you find out about AgentRefund.com?" %>
+        </td></tr><tr><td>
+          <%= select(:user_agent,:know_about_us , @select_values.split(",")) %>
+          <%= hidden_field_tag :check_updation, :value => "test" %>
+        </td></tr>
+    <%end%>
     <tr><td>
-    <%= form.label :field2, "Dummy field" %>
-    </td><td>
-    <%= form.text_field :field2 %>
-    </td></tr>
-    <tr><td>
-    <%= form.label :field3, "Dummy field" %>
-    </td><td>
-    <%= form.text_field :field3 %>
-    </td></tr>
-    <tr><td>
-    <%= form.label :field4, "Dummy field" %>
-    </td><td>
-    <%= form.text_field :field4 %>
-    <%#= form.hidden_field :id, :value => @person.id %>
-    <%= hidden_field_tag :complete_profile,:value => "complete variable" %>
-    </td></tr>
-    <tr><td>
-    <%= form.submit %>
-    </td></tr>
-</table>
+        <%= form.hidden_field :id %>
+        <%= form.hidden_field :user_id, :value => current_user.id %>
+        <%= form.submit "Update" %>
+      </td></tr>
+  </table>
 <% end %>
- 

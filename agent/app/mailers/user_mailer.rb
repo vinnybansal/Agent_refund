@@ -14,6 +14,12 @@ class UserMailer < ActionMailer::Base
     @body[:url]  =  "http://50.56.75.234:3000/"
   end
 
+  def forgot_password(user)
+   @user = user
+   setup_email(user)
+   @reset_password_link = "http://50.56.75.234:3000/reset_password/#{user.perishable_token}"
+   end
+
   protected
     def setup_email(user)
       @recipients  = "#{user.email}"
