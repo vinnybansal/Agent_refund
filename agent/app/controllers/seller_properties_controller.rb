@@ -3,7 +3,7 @@ class SellerPropertiesController < ApplicationController
   # GET /seller_properties
   # GET /seller_properties.xml
   def index
-    @seller_properties = SellerProperty.all
+    @seller_properties = current_user.seller_properties
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,7 +42,7 @@ class SellerPropertiesController < ApplicationController
   # POST /seller_properties.xml
   def create
     @seller_property = SellerProperty.new(params[:seller_property])
-
+    @seller_property.user_id = current_user.id
     respond_to do |format|
       if @seller_property.save
         format.html { redirect_to(@seller_property, :notice => 'Seller property was successfully created.') }
@@ -58,7 +58,7 @@ class SellerPropertiesController < ApplicationController
   # PUT /seller_properties/1.xml
   def update
     @seller_property = SellerProperty.find(params[:id])
-
+    @seller_property.user_id = current_user.id
     respond_to do |format|
       if @seller_property.update_attributes(params[:seller_property])
         format.html { redirect_to(@seller_property, :notice => 'Seller property was successfully updated.') }

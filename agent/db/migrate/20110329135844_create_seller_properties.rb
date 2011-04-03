@@ -1,6 +1,7 @@
 class CreateSellerProperties < ActiveRecord::Migration
   def self.up
     create_table :seller_properties do |t|
+      t.integer :user_id
       t.string :type_of_property
       t.string :estimated_price
       t.string :property_zip_code
