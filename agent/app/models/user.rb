@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 has_many :seller_properties,:include=>:user, :conditions=>["users.user_type=?","seller"]
 acts_as_authentic
+acts_as_commentable
 has_one :user_agent, :dependent => :destroy
 accepts_nested_attributes_for :user_agent, :allow_destroy => true
 validates :user_agent, :presence => true , :if => :user_is_agent
@@ -11,7 +12,7 @@ validates :user_agent, :presence => true , :if => :user_is_agent
 validates :login,:email,:first_name, :last_name, :presence => true
 validates_uniqueness_of :email
 #validates_attachment_presence :license
-validates_numericality_of :zip
+validates_numericality_of :zip, :allow_nil => true
 validates :property_price, :presence => true, :if => :user_is_buyer
 validates_numericality_of :property_price, :if => :user_is_buyer
 validates :property_type,:presence => true, :if => :user_is_buyer

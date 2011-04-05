@@ -13,6 +13,7 @@ Agent::Application.routes.draw do
    
   resources :home
   resources :user_agents
+  match '/profile/:id' => "users#show", :as => :show
   match '/update_user_agent' => "user_agents#update", :as => :update_user_agent
   match '/user_profile' => "home#user_profile", :as => :user_profile
   match '/new_agent' => "users#create", :as => :new_agent
@@ -26,6 +27,8 @@ Agent::Application.routes.draw do
   match '/upload_agreement' => "home#upload_agreement", :as => :upload_agreement
   match '/uncompleted' => "home#uncompleted", :as => :uncompleted
   match '/welcome' => "home#welcome", :as => :welcome
+  match '/create_comment' => "users#create_comment" , :as => :create_comment
+  match '/agreement_upload' => "user_agents#upload_agreement", :as => :agreement_upload
 
   match 'forgot_password' => 'user_sessions#forgot_password', :as => :forgot_password, :via => :get
   match 'forgot_password' => 'user_sessions#forgot_password_lookup_email', :as => :forgot_password, :via => :post

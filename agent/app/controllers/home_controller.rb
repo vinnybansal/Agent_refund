@@ -11,6 +11,7 @@ class HomeController < ApplicationController
     @user_agent = current_user.user_agent
     @country = Country.where("name = 'United States'")
     @states = State.where("country_id = #{@country.first.id}")
+    @user_comment = @person.comments.new
   end
   def download
     @user = current_user
@@ -18,7 +19,7 @@ class HomeController < ApplicationController
     #redirect_to root_path
   end
   def upload_agreement
-    @person = current_user
+    @person = current_user.user_agent
   end
   def welcome
     
@@ -26,6 +27,7 @@ class HomeController < ApplicationController
   def user_profile
     @user = current_user
     @user_agent = @user.user_agent
+    @user_comment = current_user.comments.new
 
   end
   

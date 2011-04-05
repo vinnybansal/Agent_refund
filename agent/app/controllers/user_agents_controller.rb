@@ -30,9 +30,26 @@ class UserAgentsController < ApplicationController
         flash[:notice] = "Error occured"
         render :action => 'home/uncompleted'
       end
+      
+     
     end
       puts "outside loop"
     #redirect_to root_path unless @user.user_type == "agent"
+  end
+  def upload_agreement
+    puts "upload agreement"
+    puts params.inspect
+    @user_agent = UserAgent.find(params[:id])
+    if params[:hifield]
+       if @user_agent.update_attributes!(:ag_uploaded => true,:agreement => params[:user_agent][:agreement]) 
+        flash[:notice] = "Successfully uploaded the agreement."
+        redirect_to welcome_path
+      else
+        flash[:notice] = "Ssss"
+        redirect_to welcome_path
+        end
+    end
+    
   end
   
   def edit

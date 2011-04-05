@@ -1,0 +1,10 @@
+<ol class="comments">
+	<li>
+	<ul class="meta">
+	<li><%= image_tag "gravatar.jpg"%></li>
+	<li><%= @comments.title %></li>
+	<li><%= @comments.created_at %></li>
+	</ul>
+	<div class="body"><%= @comments.comment %></div>
+	</li>
+</ol>

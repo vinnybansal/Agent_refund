@@ -15,9 +15,9 @@ class UsersController < ApplicationController
    @user = User.new
   end
 
-  def show
-    @user = @current_user
-  end
+  #def show
+   # @user = @current_user
+  #end
   def create
     @user = User.new(params[:user])
     @country = Country.where("name = 'United States'")
@@ -71,16 +71,28 @@ class UsersController < ApplicationController
        render :action => :new
      end
  end
+ def show
+   @user = User.find_by_login(params[:id])
+   @user_agent = @user.user_agent unless @user.user_agent.nil?
+   @comment = @user.comments.new
+   @comments = @user.comments
+ end
+ def create_comment
+   @user = User.find(params[:user])
+   @user_agent = @user.user_agent 
+   @comment = @user.comments.create(params[:comment])
+   if @comment.save
+     flash[:notice] = "Review successful added"
+   end
+ end
  #update confliction
   
-  
-
   def update
     @user = User.find(params[:id])
     if @user.update_attributes!(params[:user])
      @user.user_agent.update_attribute(:p_completed, true) if params[:complete_profile]
-     @user.user_agent.update_attribute(:ag_uploaded, true) if params[:hifield]
-     flash[:notice] = "Successfully uploaded the agreement."  if  params[:hifield]
+     #@user.user_agent.update_attribute(:ag_uploaded, true) if params[:hifield]
+     #flash[:notice] = "Successfully uploaded the agreement."  if  params[:hifield]
      flash[:notice] = "Successfully completed the profile." if params[:complete_profile]
      redirect_to welcome_path
     else

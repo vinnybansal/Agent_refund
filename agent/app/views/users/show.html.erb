@@ -23,9 +23,12 @@
 <b>Broker Name :</b> <%= @user_agent.broker_name  %> <br/>
   <% end %>
 <% end %>
-<%= link_to "Edit profile", uncompleted_path , :style => "background:none repeat scroll 0 0 blue;color:#FFFFFF;padding:2px 5px;" %>
-
-<%= link_to "Write Review", "/profile/#{@user.login}", :style => "background:none repeat scroll 0 0 green;color:#FFFFFF;padding:2px 5px;" %>
-</p>
-
- 
+<% unless @user == current_user %>
+<%= form_for @comment,:url => create_comment_path, :remote => true do |comment|  %>
+<%= hidden_field_tag :user, current_user.id unless current_user.blank?%>
+<%= comment.text_area :comment, :cols => 70,:rows => 10 %><br />
+<%= comment.submit "Submit Review" %>
+<% end %>
+<% end %>
+<% comments ||= @comments %>
+<%= render :partial => "comments/reviews", :collection => comments %>
