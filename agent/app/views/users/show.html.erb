@@ -23,12 +23,6 @@
 <b>Broker Name :</b> <%= @user_agent.broker_name  %> <br/>
   <% end %>
 <% end %>
-<% unless @user == current_user %>
-<%= form_for @comment,:url => create_comment_path, :remote => true do |comment|  %>
-<%= hidden_field_tag :user, current_user.id unless current_user.blank?%>
-<%= comment.text_area :comment, :cols => 70,:rows => 10 %><br />
-<%= comment.submit "Submit Review" %>
-<% end %>
-<% end %>
-<% comments ||= @comments %>
-<%= render :partial => "comments/reviews", :collection => comments %>
+<%= render :partial => "comments/reviews", :locals => { :comments => @comments } %>
+<%= render :partial => "comments/create_comment",:locals => { :comment => @comment } %>
+

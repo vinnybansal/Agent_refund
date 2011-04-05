@@ -12,7 +12,7 @@ padding:0px;
 }
 a {
 text-decoration:none;
-color:#000000;
+color:#008000;
 }
 a:hover {
 color:#ff0000;
@@ -32,6 +32,7 @@ font-size:18px;
 color:#ff9000;
 text-align:center;
 font-weight:normal;
+padding-right:200px;
 }
 h3 {
 font-size:30px;

@@ -13,6 +13,8 @@ Agent::Application.routes.draw do
    
   resources :home
   resources :user_agents
+  match '/reviews' => "home#find_review", :as => :reviews
+  match '/agents' => "home#find_agent", :as => :agents
   match '/profile/:id' => "users#show", :as => :show
   match '/update_user_agent' => "user_agents#update", :as => :update_user_agent
   match '/user_profile' => "home#user_profile", :as => :user_profile

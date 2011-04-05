@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   #before_filter :require_profile_completeness, :except => [:uncompleted]
   def index
     @user = current_user
+    redirect_to  user_seller_properties_path(@user) if @user.user_type == 'seller'
   end
   def uncompleted
     @person = current_user
@@ -23,6 +24,15 @@ class HomeController < ApplicationController
   end
   def welcome
     
+  end
+  def find_review
+    @user = User.find(params[:user_id])
+    @comments = @user.comments.where("review_type = '#{params[:review_type]}'")
+    render :partial => "/comments/reviews", :locals => { :comments => @comments }, :layout => false
+  end
+  
+  def find_agent
+    @agents = Administrator.find_agent params[:page]
   end
   def user_profile
     @user = current_user

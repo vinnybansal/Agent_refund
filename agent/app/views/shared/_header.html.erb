@@ -3,6 +3,7 @@
         <div class="logo"><a href="#"><%= image_tag "logo.jpg" %></a></div>
         <div class="login_btn">
     <% if current_user %>
+		<%= link_to "Find agents", agents_path %>&nbsp;|&nbsp;
       <%= link_to "Profile", user_profile_path %>
       &nbsp;|&nbsp;<%= link_to "Logout", logout_path %><br/><br/>
       Hi <%= current_user.login %>&nbsp;!&nbsp;&nbsp;<%= Time.now.hour %>:<%= Time.now.min %>:<%= Time.now.sec%><br/>

@@ -41,7 +41,7 @@ class UsersController < ApplicationController
        flash[:notice] = "Your account has been successfully created."
        redirect_to root_url
     else
-      render :action => :new
+      render :action => :new_buyer
     end
    elsif params[:user][:user_type] == "seller"
       #do integration part
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Your account has been successfully created."
       redirect_to  user_seller_properties_path(@user)
     else
-      render :action => :new
+      render :action => :new_seller
     end
    end
  end
@@ -81,6 +81,7 @@ class UsersController < ApplicationController
    @user = User.find(params[:user])
    @user_agent = @user.user_agent 
    @comment = @user.comments.create(params[:comment])
+   @comment.user_id = current_user.id
    if @comment.save
      flash[:notice] = "Review successful added"
    end
