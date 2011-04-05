@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @country = Country.where("name = 'United States'")
     @states = State.where("country_id = #{@country.first.id}")
+    params[:user_agent][:agent_approved] = true
     @user.build_user_agent(params[:user_agent])
     if params[:user][:user_type] == "agent"
     if @user.save
