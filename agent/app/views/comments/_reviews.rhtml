@@ -1,0 +1,15 @@
+<% unless @comments.blank?%>
+<%#= select "comment", "review_type" , "<option>Client Review</option><option selected='selected'>Peer Review</option><option>Agent Review</option>" %>
+<div id="review_container" style="width:200px;">
+<% @comments.each do |comment| %>
+
+<div style="backgrond:#fcfcfc; border:1px solid #d8d8d8; padding:10px; margin:10px 0px;">
+Review Type		:  <%= comment.review_type %><br />
+Submitted By	:  <%= User.find(comment.user_id).first_name %><br />
+Review			:  <%= comment.comment %><br />
+</div>
+<% end %>
+<% else %>
+<span>No review created yet</span>
+</div>
+<% end %>

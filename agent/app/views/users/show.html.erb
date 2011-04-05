@@ -1,0 +1,28 @@
+<p>
+  <b>Login</b> : <%= @user.login  %> <br/>
+  <b>Email</b> : <%= @user.email  %> <br/>
+  <b>Name</b>  : <%= "#{@user.first_name} #{@user.last_name}"   %> <br/>
+  <b>City</b>  : <%= @user.city %> <br/>
+  <b>State</b> : <%= @user.state  %> <br/>
+  <b>Zip</b>   : <%= @user.zip  %> <br/>
+  <b>Address 1</b> : <%= @user.address1  %> <br/>
+  <b>Address 2</b> : <%= @user.address2  %> <br/>
+<% if @user.user_type == "agent" %>
+  <% if @user_agent.p_completed %>
+  <b>Started buisiness:</b> <%= @user_agent.start_year  %>  <br/>
+<b>Home sold last year :</b> <%= @user_agent.home_sold_last_year  %>  <br/>
+<b>Top cities home sold :</b> <%= @user_agent.top_cities  %>  <br/>
+<b>Total home sold :</b> <%= @user_agent.home_sold_lifetime  %>  <br/>
+<b>Designation :</b> <%= @user_agent.designation  %>  <br/>
+<b>Client review :</b> <%= @user_agent.client_details  %>  <br/>
+<b>License expiration:</b> <%= @user_agent.license_expiration_date  %>  <br/>
+<b>E&O policy expiration :</b> <%= @user_agent.eo_policy_expiration_date  %>  <br/>
+<b>violation :</b> <%= @user_agent.violation  %>  <br/>
+<b>Agreement uploaded :</b> <%= @user_agent.ag_uploaded  %>  <br/>
+<b>company :</b> <%= @user_agent.company_name  %> <br/>
+<b>Broker Name :</b> <%= @user_agent.broker_name  %> <br/>
+  <% end %>
+<% end %>
+<%= render :partial => "comments/reviews", :locals => { :comments => @comments } %>
+<%= render :partial => "comments/create_comment",:locals => { :comment => @comment } %>
+

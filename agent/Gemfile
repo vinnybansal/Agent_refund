@@ -4,6 +4,7 @@ gem 'authlogic'
 gem 'rails3-generators'
 gem 'nifty-generators', :group => :development
 gem 'jquery-rails', '>= 0.2.6'
+gem 'acts_as_commentable'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'paperclip', "~> 2.3"
@@ -11,6 +12,8 @@ gem 'paperclip', "~> 2.3"
 gem 'mysql'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
+gem "will_paginate", "~> 3.0.pre2"
+
 #gem 'wkhtmltopdf'
 # Use unicorn as the web server
 # gem 'unicorn'

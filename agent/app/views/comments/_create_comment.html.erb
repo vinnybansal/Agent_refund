@@ -1,0 +1,14 @@
+<% unless @user.blank? %>
+<div id="comment_write"> 
+<% unless @user == current_user %>
+<%= form_for @comment,:url => create_comment_path, :remote => true do |comment|  %>
+<%= hidden_field_tag :user, @user.id unless @user.blank?%>
+<%= comment.select :review_type , "<option>Client Review</option><option selected='selected'>Peer Review</option><option>Agent Review</option>"%><br />
+<%= comment.text_area :comment, :cols => 70,:rows => 10 %><br />
+<%= comment.submit "Submit Review" %>
+<% end %>
+<% end %>
+</div>
+<% else %>
+<span>NO user found</span>
+<% end %>

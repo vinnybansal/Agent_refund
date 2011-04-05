@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
     def require_profile_completeness
-      if !current_user.p_completed
+      if !current_user.user_agent.p_completed
         redirect_to uncompleted_path
         return false
       end
@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
       logger.debug "ApplicationController::current_user"
       return @current_user if defined?(@current_user)
       @current_user = current_user_session && current_user_session.user
+      
     end
 
     def require_user

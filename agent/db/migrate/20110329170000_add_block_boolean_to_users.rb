@@ -6,5 +6,8 @@ class AddBlockBooleanToUsers < ActiveRecord::Migration
   end
 
   def self.down
+    remove_column :users, :block
+    remove_column :users, :agent_approved
+    remove_column :users, :upload_agreement
   end
 end

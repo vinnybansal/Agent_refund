@@ -1,0 +1,10 @@
+<ol class="reviews">
+	<li>
+	<ul class="meta">
+	<li><%= image_tag "gravatar.jpg"%></li>
+	<li><%= @reviews.title %></li>
+	<li><%= @reviews.created_at %></li>
+	</ul>
+	<div class="body"><%= @reviews.comment %></div>
+	</li>
+</ol>

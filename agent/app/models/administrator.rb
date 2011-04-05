@@ -1,6 +1,9 @@
-class Administrator
-  def self.find_agent
-    agent = User.where("user_type = 'agent'").where("block = 'false'").order("created_at DESC").all
+class Administrator 
+  def self.find_agent page
+    
+    agents = UserAgent.where("block = false").where("p_completed = true").where("agent_approved = true").order("created_at DESC").paginate(:page => page, :per_page => 2)
+
+    
   end
 
   def self.find_seller

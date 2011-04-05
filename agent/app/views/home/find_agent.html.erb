@@ -1,0 +1,66 @@
+<% unless @agents.blank? %>
+<div id="agent_container" style="width:600px;">
+    <% @agents.each do |agent| %>
+    <div id="agent_part" style="width:450px;">
+        Name 				   : <%= "#{agent.user.first_name} #{agent.user.last_name }" %>
+        <br/>
+        Email				   : <%= agent.user.email %>
+        <br/>
+        House Sold(Last Year)  : <%= agent.home_sold_last_year %>
+        <br/>
+        House Sold(Life Time)  : <%= agent.home_sold_lifetime %>
+        <br/>
+        Started Buisiness in   : <%= agent.start_year %>
+        <br/>
+        Company				   : <%= agent.company_name %>
+        <br/>
+        Broker Name			   : <%= agent.broker_name %>
+        <br/>
+        <div id="agent_button" style="float:right;">
+		    <div style="float:left; width:200px; padding:10px 0px; background:#d8d8d8; margin:10px 0px; text-align:center; font-size:18px; font-width:bold: color:blue;"><%= link_to "Read Reviews", "#", :onclick => "readReview_#{agent.id}();" %></div>
+			<div style="float:left; width:250px; padding:10px 0px; margin:10px 0px; background:#d8d8d8; text-align:center;font-size:18px; font-width:bold: color:blue;"><%= link_to "Write Review", "#", :onclick => "writeReview_#{agent.id}();" %></div>
+         
+        </div>
+    </div>
+    <% @comment = agent.user.comments.new %>
+    <% @comments = agent.user.comments %>
+    <% @user = agent.user %>
+    <div id="writereview_<%= agent.id %>" style="display:none;">
+        <%= render :partial => "comments/create_comment",:locals => { :comment => @comment } %>
+    </div>
+    <div id="readreview_<%= agent.id %>" style="display:none;">
+        <h2>Agent Review</h2>
+        <%#= select "comment", "review_type" , "<option value='Client Review'>Client Review</option><option value='Peer Review'>Peer Review</option><option value='Agent Review'>Agent Review</option>" , { :include_blank => true }, {:onchange => "getReviews_#{agent.id}(this.value,#{agent.user.id});", :style => "width:175px;"} %>
+        <%= render :partial => "comments/reviews", :locals => { :comments => @comments } %>
+    </div>
+    <hr>
+    <script type="text/javascript">
+                    function readReview_<%= agent.id %>(){
+                        $("#readreview_<%= agent.id %>").toggle(300);
+                        $("#writereview_<%= agent.id %>").hide();
+                    }
+                    
+                    function writeReview_<%= agent.id %>(){
+                        $("#readreview_<%= agent.id %>").hide()
+                        $("#writereview_<%= agent.id %>").toggle(300);
+                    }
+                		
+                	function getReviews_<%= agent.id %>(review_type,user_id){
+                     //var toggleLoading = function() { $("#loading").toggle() };
+                     $.ajax({
+                       async:true,
+                       url:'/agents/',
+                       type:'GET',
+                       data: "review_type="+review_type+"&"+"user_id="+user_id,
+                       success: function(data1){alert(data1);$("#readreview_<%= agent.id %>").html(data1)},
+                       error:function(request){}
+                     })
+                       return false
+                   }
+                    
+            
+    </script>
+    <% end %>
+    <%= will_paginate @agents %>
+</div>
+<% end %>

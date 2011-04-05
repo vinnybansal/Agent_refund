@@ -3,6 +3,9 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'pdfkit'
 
+require File.expand_path("../../vendor/plugins/paperclippolymorph/lib/acts_as_polymorphic_paperclip", __FILE__)
+
+
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
