@@ -1,4 +1,5 @@
 Agent::Application.routes.draw do
+  match '/rate/:type/:id' => "ratings#rate_up", :as=>:rating_seller
   resources :seller_properties
   get "users/new"
 
@@ -13,6 +14,7 @@ Agent::Application.routes.draw do
    
   resources :home
   resources :user_agents
+  match '/seller/:type/:id/:ratings_value' => "ratings#rate", :as=>:seller_rating 
   match '/reviews' => "home#find_review", :as => :reviews
   match '/agents' => "home#find_agent", :as => :agents
   match '/profile/:id' => "users#show", :as => :show

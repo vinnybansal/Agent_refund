@@ -12,8 +12,8 @@ validates_uniqueness_of :email
 validates_numericality_of :zip, :allow_nil => true
 validates :property_price, :presence => true, :if => :user_is_seller
 validates_numericality_of :property_price, :if => :user_is_seller
-validates :property_type,:presence => true, :if => :user_is_buyer
-validates_numericality_of :price, :if => :user_is_buyer
+#validates :property_type,:presence => true, :if => :user_is_buyer
+#validates_numericality_of :price, :if => :user_is_buyer
 validates_acceptance_of :terms_service
 validates_acceptance_of :privacy_policy 
 

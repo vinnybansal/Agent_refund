@@ -1,0 +1,56 @@
+<% if rateable_object.rated_by?(current_user)%>
+ <ul class='star-rating'>
+  <li class='current-rating' style='width:<%= (rateable_object.average_rating * 30).to_i -%>px;'></li>
+</ul>
+ 
+<%= link_to "Rate-again", rating_seller_path(rateable_object.class.name,rateable_object.id),:rateable_type =>   rateable_object.class.name ,:id => "rating_it_again_#{rateable_object.id}", :remote => true %>
+<%else%>
+
+<ul class='star-rating'>
+
+   <li>
+     <%= link_to "1", seller_rating_path(rateable_object.class.name,:id=>rateable_object,:ratings_value=> 1), :id => "rating_1_#{rateable_object.id}", :rating => 1, :rateable_type => rateable_object.class.to_s ,:class => 'one-star', :name => '1 star out of 5',:remote => true %>
+   </li>
+   <li>
+     <%= link_to "2", seller_rating_path(rateable_object.class.name,:id=>rateable_object,:ratings_value=> 2), :id => "rating_2_#{rateable_object.id}", :rating => 2, :rateable_type => rateable_object.class.to_s ,:class => 'two-stars', :name => '2 star out of 5',:remote => true %>
+   </li>
+    <li>
+     <%= link_to "3", seller_rating_path(rateable_object.class.name,:id=>rateable_object,:ratings_value=> 3), :id => "rating_3_#{rateable_object.id}", :rating => 3, :rateable_type => rateable_object.class.to_s , :class => 'three-stars', :name => '3 star out of 5',:remote => true %>
+   </li>
+    <li>
+     <%= link_to "4", seller_rating_path(rateable_object.class.name,:id=>rateable_object,:ratings_value=> 4), :id => "rating_4_#{rateable_object.id}", :rating => 4, :rateable_type => rateable_object.class.to_s , :class => 'four-stars', :name => '4 star out of 5',:remote => true %>
+   </li>
+   <li>
+     <%= link_to "5", seller_rating_path(rateable_object.class.name,:id=>rateable_object,:ratings_value=> 5), :id => "rating_5_#{rateable_object.id}", :rating => 5, :rateable_type => rateable_object.class.to_s , :class => 'five-stars', :name => '5 star out of 5',:remote => true %>
+   </li>
+
+</ul>
+<% end %>
+
+
+<script type="text/javascript">
+
+$("#rating_1_<%=  rateable_object.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= rateable_object.id %>").html(data);
+  });
+
+$("#rating_2_<%= rateable_object.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= rateable_object.id %>").html(data);
+  });
+
+$("#rating_3_<%= rateable_object.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= rateable_object.id%>").html(data);
+  });
+ 
+$("#rating_4_<%= rateable_object.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= rateable_object.id %>").html(data);
+  });
+ 
+$("#rating_5_<%= rateable_object.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= rateable_object.id %>").html(data);
+  });    
+
+ $("#rating_it_again_<%= rateable_object.id %>").bind("ajax:success", function(event, data, status, xhr) {
+   $("#star-ratings-block_<%= rateable_object.id %>").html(data);
+  });
+</script>

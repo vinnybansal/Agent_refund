@@ -1,8 +1,8 @@
 
    <%= form_for @user do |form| %>
     <%= form.error_messages %>
-    <div class="formList">
-    <table>
+<div class="formList">
+ <table>
     <tr><td>
     <%= form.label :login, "Login" %>
     </td><td>
@@ -45,19 +45,9 @@
     </td><td>
     <%= form.text_field :zip %>
     </td></tr>
-    <tr><td>
-    <%= form.label :property_type, "Type Of Property" %>
-    </td><td>
-    <%= form.text_field  :property_type, :class => 'required_field'  %>
-    </td></tr>
-    <tr><td>
-    <%= form.label :price, "Estimated Price" %>
-    </td><td>
-    <%= form.text_field :price %>
     <%= form.hidden_field :user_type, :value => "buyer" %>
-    </td></tr>
     <tr><td>
     <%= form.submit "Submit" %>
     </td></tr></table>
-<% end %>
-    </div>
+  <% end %>
+ </div>

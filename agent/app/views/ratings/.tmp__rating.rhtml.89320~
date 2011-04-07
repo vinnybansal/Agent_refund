@@ -1,0 +1,68 @@
+<% unless seller_property.ratings(current_user).blank? %>
+ <ul class='star-rating'>
+  <li class='current-rating' style='width:<%= (seller_property.average_rating * 25).to_i -%>px;'></li>
+</ul>
+  <div class="num-ratings">
+     <%= seller_property.rates.size %>
+  </div>
+
+<%= link_to "Rate-again", rating_seller_path(seller_property.id),
+       :id => "rating_it_again_#{seller_property.id}", :remote => true %>
+
+
+<%else%>
+
+<ul class='star-rating'>
+
+
+   <li>
+       <%= link_to "1", seller_rating_path(seller_property.id, 1), :id => "rating_1_#{seller_property.id} ", :rating => 1,
+           :class => 'one-star', :name => '1 star out of 5',:remote => true %>
+   </li>
+   <li>
+       <%= link_to "2", seller_rating_path(seller_property.id, 2), :id => "rating_2_#{seller_property.id}", :rating => 2,
+           :class => 'two-stars', :name => '2 star out of 5',:remote => true %>
+   </li>
+    <li>
+       <%= link_to "3", seller_rating_path(seller_property.id, 3), :id => "rating_3_#{seller_property.id}", :rating => 3,
+           :class => 'three-stars', :name => '3 star out of 5',:remote => true %>
+   </li>
+    <li>
+       <%= link_to "4", seller_rating_path(seller_property.id, 4), :id => "rating_4_#{seller_property.id}", :rating => 4,
+           :class => 'four-stars', :name => '4 star out of 5',:remote => true %>
+   </li>
+   <li>
+       <%= link_to "5", seller_rating_path(seller_property.id, 5), :id => "rating_5_#{seller_property.id}", :rating => 5,
+           :class => 'five-stars', :name => '5 star out of 5',:remote => true %>
+   </li>
+
+</ul>
+<% end %>
+
+
+<script type="text/javascript">
+
+$("#rating_1_<%= seller_property.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= seller_property.id %>").html(data);
+  });
+
+$("#rating_2_<%= seller_property.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= seller_property.id %>").html(data);
+  });
+
+$("#rating_3_<%= seller_property.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= seller_property.id %>").html(data);
+  });
+ 
+$("#rating_4_<%= seller_property.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= seller_property.id %>").html(data);
+  });
+ 
+$("#rating_5_<%= seller_property.id %>").bind("ajax:success", function(event, data, status, xhr) {
+    $("#star-ratings-block_<%= seller_property.id %>").html(data);
+  });    
+
+ $("#rating_it_again_<%= seller_property.id %>").bind("ajax:success", function(event, data, status, xhr) {
+     $("#star-ratings-block_<%= seller_property.id %>").html(data);
+  });
+</script>
