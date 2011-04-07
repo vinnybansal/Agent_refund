@@ -1,7 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user_session, :current_user, :require_profile_completeness
+  helper_method :current_user_session, :current_user, :require_profile_completeness, :is_agent, :user_is_agent, :require_agent
+  
+  def is_agent
+    return true if current_user.user_type == "agent"
+  end
+  def user_is_agent user
+    return true if user.user_type == "agent"
+  end
 
   private
     def require_profile_completeness
@@ -29,6 +36,14 @@ class ApplicationController < ActionController::Base
         store_location
         flash[:notice] = "You must be logged in to access this page"
         redirect_to new_user_session_url
+        return false
+      end
+    end
+    def require_agent
+      unless current_user.user_type == "agent"
+        store_location
+        flash[:notice] = "You have to be agent to do this operation"
+        redirect_to root_path
         return false
       end
     end

@@ -1,0 +1,8 @@
+<div style="margin-top:40px;">
+<%= form_tag ("/send_notification") do %>
+<%= label_tag "Client" %><%= radio_button_tag "agent", "client" %>&nbsp;&nbsp;<%= label_tag "Peer" %><%= radio_button_tag "agent", "peer" %><br />
+<%= label_tag "Email" %>
+<%= text_field_tag :email %>
+<%= submit_tag "Send Mail" %>
+<% end %>
+</div>

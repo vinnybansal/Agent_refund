@@ -1,9 +1,12 @@
 <!-- header wrap start here -->
 <div class="header_wrap">
-        <div class="logo"><a href="#"><%= image_tag "logo.jpg" %></a></div>
+        <div class="logo"><%= link_to image_tag("logo.jpg"), root_url %></div>
         <div class="login_btn">
     <% if current_user %>
-		<%= link_to "Find agents", agents_path %>&nbsp;|&nbsp;
+	<% if user_is_agent current_user %>
+	<%= link_to "Review Request" , send_request_path %>&nbsp;|&nbsp;
+	<% end %>
+		<%= link_to "Agents", agents_path %>&nbsp;|&nbsp;
       <%= link_to "Profile", user_profile_path %>
       &nbsp;|&nbsp;<%= link_to "Logout", logout_path %><br/><br/>
       Hi <%= current_user.login %>&nbsp;!&nbsp;&nbsp;<%= Time.now.hour %>:<%= Time.now.min %>:<%= Time.now.sec%><br/>

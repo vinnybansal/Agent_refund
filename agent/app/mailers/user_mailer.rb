@@ -13,6 +13,19 @@ class UserMailer < ActionMailer::Base
     @subject += "Welcome to the site!"
     @body[:url]  =  "http://50.56.75.234:3000/"
   end
+  def  past_client_notification(email,agent)
+    setup_reciever(email)
+    @subject += "Requested your review"
+    @body[:agent_name] = "#{agent.first_name} #{agent.last_name}"
+    @body[:url] = "http://50.56.75.234:3000/#{agent.login}/reviews"
+  end
+  def peer_notification(email,agent)
+    setup_reciever(email)
+    @subject += "Requested your review"
+    @body[:agent_name] = "#{agent.first_name} #{agent.last_name}"
+    @body[:url] = "http://50.56.75.234:3000/#{agent.login}/reviews"
+  end
+  
 
   def forgot_password(user)
    @user = user
@@ -21,6 +34,12 @@ class UserMailer < ActionMailer::Base
    end
 
   protected
+    def setup_reciever(email)
+      @recipients = "#{email}"
+      @from = "noreply@agentrefund.com"
+      @subject = "[agentrefund]"
+      @sent_on = Time.now
+    end
     def setup_email(user)
       @recipients  = "#{user.email}"
       @from        = "noreply@agentrefund.com"

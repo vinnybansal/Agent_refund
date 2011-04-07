@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   require 'pdfkit'
+ 
   def new
     @user = User.new
     @user.user_agent = UserAgent.new
@@ -79,13 +80,20 @@ class UsersController < ApplicationController
    @comments = @user.comments
  end
  def create_comment
+   puts "create comment params--------------------------."
+   puts params[:temp]
    @user = User.find(params[:user])
    @user_agent = @user.user_agent 
    @comment = @user.comments.create(params[:comment])
-   @comment.user_id = current_user.id
+   @comment.user_id = current_user.id unless current_user.blank?
    if @comment.save
-     flash[:notice] = "Review successful added"
+     unless params[:temp].blank?
+     flash[:notice] = "Thanks, Added your Review successfully "
+     else
+     flash[:notice] = "Review Added"
+     end
    end
+    #   redirect_to root_url if params[:temp]
  end
  #update confliction
   
@@ -115,7 +123,7 @@ class UsersController < ApplicationController
    else
      flash[:notice] = "There was a problem resetting your password."
      render :action => :reset_password
-   end
+   end 
  end
  
   

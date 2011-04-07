@@ -12,9 +12,11 @@ class UserAgent < ActiveRecord::Base
  # unless params[:hifield].blank?
 #end
   has_attached_file :license,
+   :content_type => ['application/pdf', 'application/msword', 'text/plain'],
    :url  => "/license/:id",
    :path => "#{Rails.root}/public/upload/license/:id/:basename.:extension"
   has_attached_file :policy,
+  :content_type => ['application/pdf', 'application/msword', 'text/plain'],
    :url  => "/policy/:id",
    :path => "#{Rails.root}/public/upload/policy/:id/:basename.:extension"
   has_attached_file :agreement,

@@ -13,6 +13,7 @@ gem 'mysql'
 gem 'pdfkit'
 gem 'wkhtmltopdf-binary'
 gem "will_paginate", "~> 3.0.pre2"
+gem "custom_error_message"
 
 #gem 'wkhtmltopdf'
 # Use unicorn as the web server

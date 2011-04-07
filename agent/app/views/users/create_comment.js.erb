@@ -1,3 +1,7 @@
 $("#comment_comment").val('');
 $("#writereview").hide(300);
 $("#readreview").show(300);
+//$(".flashnotice").html("<%= escape_javascript(flash[:notice]) %>");
+$('.content_wrap').prepend('<div id="flash_notice" ></div>');
+jQuery('#flash_notice').html("<%= flash[:notice].to_json %>");
+jQuery('#flash_notice').show();

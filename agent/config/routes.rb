@@ -14,6 +14,9 @@ Agent::Application.routes.draw do
    
   resources :home
   resources :user_agents
+  match '/send_request' => 'home#send_request', :as => :send_request
+  match '/:id/reviews' => 'home#write_review', :as => :write_review
+  match '/send_notification' => 'home#send_notification', :as => :notification
   match '/seller/:type/:id/:ratings_value' => "ratings#rate", :as=>:seller_rating 
   match '/reviews' => "home#find_review", :as => :reviews
   match '/agents' => "home#find_agent", :as => :agents

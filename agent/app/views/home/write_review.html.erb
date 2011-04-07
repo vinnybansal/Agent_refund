@@ -1,0 +1,40 @@
+<% unless @user.blank? %>
+<div id="agent_container" style="width:600px;">
+    <div id="agent_part" style="width:450px;">
+        Name 				   : <%= "#{@user.first_name} #{@user.last_name }" %>
+        <br/>
+        Email				   : <%= @user.email %>
+        <br/>
+        House Sold(Last Year)  : <%= @user.user_agent.home_sold_last_year %>
+        <br/>
+        House Sold(Life Time)  : <%= @user.user_agent.home_sold_lifetime %>
+        <br/>
+        Started Buisiness in   : <%= @user.user_agent.start_year %>
+        <br/>
+        Company				   : <%= @user.user_agent.company_name %>
+        <br/>
+        Broker Name			   : <%= @user.user_agent.broker_name %>
+        <br/>
+        <div id="agent_button" style="float:right;">
+			<% if user_is_agent @user %>
+			<div style="float:left; width:250px; padding:10px 0px; margin:10px 0px; background:#d8d8d8; text-align:center;font-size:18px; font-width:bold: color:blue;"><%= link_to "Write Review", "#", :onclick => "writeReview();" %></div>
+			<% end %>
+        </div>
+    </div>
+    <% @comment = @user.comments.new %>
+    <%# @user = @user.user %>
+	
+    <div id="writereview" style="display:none;">
+	<% @temp = "test value" %>
+        <%= render :partial => "comments/create_review",:locals => { :comment => @comment, :user => @user, :temp => @temp } %>
+    </div>
+    <script type="text/javascript">
+                    
+                    function writeReview(){
+                        $("#writereview").toggle(300);
+                    }
+    </script>
+</div>
+<% else %>
+<p>No agents found </p>
+<% end %>

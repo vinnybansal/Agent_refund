@@ -1,0 +1,13 @@
+<% unless @user.blank? %>
+<div id="comment_write"> 
+<%= form_for @comment,:url => create_comment_path, :remote => true do |comment|  %>
+<%= hidden_field_tag :user, @user.user_agent.id unless @user.blank?%>
+<%= comment.select :review_type , "<option>Client Review</option><option selected='selected'>Peer Review</option><option>Agent Review</option>"%><br />
+<%= comment.text_area :comment, :cols => 70,:rows => 10 %><br />
+<%= hidden_field_tag "temp", "tempvalue" %>
+<%= comment.submit "Submit Review" %>
+<% end %>
+</div>
+<% else %>
+<span>NO Agent found</span>
+<% end %>
