@@ -2,10 +2,6 @@
 // This file is automatically included by javascript_include_tag :defaults
 jQuery(document).ready(function(){
 jQuery(function() {
-    $('.required_field').after('<div style="float: right;color: red;font-size: 2em;"> * </div>');
-	$(document).ajaxError(function(event, request) {
-  var msg = request.getResponseHeader('X-Message');
-  if (msg) alert(msg);
-});
+   $('.required_field').after('<div style="float: right;color: red;font-size: 2em;"> * </div>');
 });
 });

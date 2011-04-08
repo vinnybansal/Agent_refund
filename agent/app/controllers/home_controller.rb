@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   before_filter :require_user, :except => :write_review
-  before_filter :require_agent, :only => :send_request
+  before_filter :require_agent, :only => [:send_request, :send_notification]
   #before_filter :require_profile_completeness, :except => [:uncompleted]
   def index
     @user = current_user
@@ -41,19 +41,32 @@ class HomeController < ApplicationController
     @user_comment = current_user.comments.new 
   end
   def write_review
-        redirect_to root_url if params[:id].blank?
+        #redirect_to root_url if params[:id].blank?
+        unless Token.find_by_token(params[:token]).blank?
+        @token = Token.find_by_token(params[:token])
+      end
+        unless @token
+          flash[:error] = "The url is invalid"
+          redirect_to root_url
+        else
         @user = User.find_by_login(params[:id])
+        end
+       
   end
   def send_request
     
   end
   def send_notification
     @email = params[:email]
+    o =  [('a'..'z'),('A'..'Z')].map{|i| i.to_a}.flatten  
+    @token  =  (0..30).map{ o[rand(o.length)]  }.join
     @agent = current_user unless current_user.blank?
     if params[:agent] == "client"
-    UserMailer.past_client_notification(@email,@agent).deliver
+    UserMailer.past_client_notification(@email,@agent,@token).deliver
+    @agent.tokens.create(:token => @token)
   elsif params[:agent] == "peer"
-    UserMailer.peer_notification(@email,@agent).deliver
+    UserMailer.peer_notification(@email,@agent,@token).deliver
+    @agent.tokens.create(:token => @token)
     end
     flash[:notice] = "Mail sent successfully to the client"
     redirect_to root_url

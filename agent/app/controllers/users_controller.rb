@@ -82,18 +82,23 @@ class UsersController < ApplicationController
  def create_comment
    puts "create comment params--------------------------."
    puts params[:temp]
+   puts params[:token]
    @user = User.find(params[:user])
+   unless params[:token].blank?
+     @token = Token.find_by_token(params[:token])
+   end  
    @user_agent = @user.user_agent 
    @comment = @user.comments.create(params[:comment])
+   
    @comment.user_id = current_user.id unless current_user.blank?
    if @comment.save
+     @token.delete
      unless params[:temp].blank?
      flash[:notice] = "Thanks, Added your Review successfully "
      else
      flash[:notice] = "Review Added"
      end
    end
-    #   redirect_to root_url if params[:temp]
  end
  #update confliction
   

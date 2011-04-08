@@ -13,17 +13,17 @@ class UserMailer < ActionMailer::Base
     @subject += "Welcome to the site!"
     @body[:url]  =  "http://50.56.75.234:3000/"
   end
-  def  past_client_notification(email,agent)
+  def  past_client_notification(email,agent,token)
     setup_reciever(email)
     @subject += "Requested your review"
     @body[:agent_name] = "#{agent.first_name} #{agent.last_name}"
-    @body[:url] = "http://50.56.75.234:3000/#{agent.login}/reviews"
+    @body[:url] = "http://50.56.75.234:3000/#{agent.login}/reviews/#{token}"
   end
-  def peer_notification(email,agent)
+  def peer_notification(email,agent,token)
     setup_reciever(email)
     @subject += "Requested your review"
     @body[:agent_name] = "#{agent.first_name} #{agent.last_name}"
-    @body[:url] = "http://50.56.75.234:3000/#{agent.login}/reviews"
+    @body[:url] = "http://50.56.75.234:3000/#{agent.login}/reviews/#{token}"
   end
   
 

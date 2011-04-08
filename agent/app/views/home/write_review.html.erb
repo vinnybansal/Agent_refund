@@ -26,7 +26,7 @@
 	
     <div id="writereview" style="display:none;">
 	<% @temp = "test value" %>
-        <%= render :partial => "comments/create_review",:locals => { :comment => @comment, :user => @user, :temp => @temp } %>
+        <%= render :partial => "comments/create_review",:locals => { :comment => @comment, :user => @user, :temp => @temp, :token => @token } %>
     </div>
     <script type="text/javascript">
                     

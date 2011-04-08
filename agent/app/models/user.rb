@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 has_many :seller_properties,:include=>:user, :conditions=>["users.user_type=?","seller"]
-has_many :notifications
+has_many :tokens
 #, :include => :user, :conditions => ["users.user_type=?", "agent"]
 acts_as_authentic
 acts_as_commentable
